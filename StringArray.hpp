@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cstring>
 class String
 {	
 	private:
@@ -12,15 +12,15 @@ class String
 			len = s.len;
 			data = new char[len];
 			for(size_t i = 0; data[i] = s.data[i]; i++);
-		};
-		String(const char * s, size_t length);
+		}
+		String(const char * s, size_t length)
 		{
 			len = length;
 			data = new char[len];
 			for(size_t i = 0; data[i] = s[i]; i++);
-		};
+		}
 		~String(){delete[] data;};
-		const char operator[](size_t indx){return data[indx % len];};
+		char &operator[](size_t indx){return data[indx % len];};
 		bool operator==(const String & s)
 		{	
 			if(!(len - s.len))
@@ -29,16 +29,25 @@ class String
 				if(data[i] != s.data[i])
 					return false;
 			return true;
-		};
+		}
 		String & operator=(const String & s)
 		{	
 			len = s.len;
 			delete[] data;
 			data = new char[len];
-			for(size_t i = 0; data[i] = s[i]; i++);
+			for(size_t i = 0; data[i] = s.data[i]; i++);
+			return *this;
 		}
-		void printStr(){std::cout << data;};		
-		size_t getLen(){return len;};
+		String & operator=(const char * s)
+		{	
+			len = strlen(s);
+			delete[] data;
+			data = new char[len];
+			for(size_t i = 0; data[i] = s[i]; i++);
+			return *this;
+		}
+		void printStr(){std::cout << data;}		
+		size_t getLen(){return len;}
 };
 
 
@@ -48,7 +57,13 @@ class StringArray
 		String * data;
 		size_t len;
 	public:
-		StringArray(size_t length, String *SS arr){len = length; data = new String[len];};
+		StringArray(size_t length, String * arr)
+		{
+			len = length; 
+			data = new String[len];
+			for(int i = 0; i < len; i++)
+				data[i] = arr[i];
+		}
 		String & operator[](size_t indx){return data[indx % len];}	
 		StringArray & mergeUniqe(StringArray & sa)
 		{
@@ -63,7 +78,7 @@ class StringArray
 						break;
 					}
 			}
-			String * newData = new String[newLen]
+			String * newData = new String[newLen];
 			for(int i = 0; i < len; i++)
 				newData[i] = data[i];
 		 	int indx = len+1;
@@ -83,17 +98,17 @@ class StringArray
 			len = newLen;
 			data = newData;
 			return *this; 
-		};
+		}
 		StringArray & merge(StringArray * sa)
 		{
 			String * mergedData = new String[len + sa->len];						
-			for(i = 0; i < len; i++)
+			for(int i = 0; i < len; i++)
 				mergedData[i] = data[i];
 			delete[] data;
-			for(i = 0; i < sa->len; i++)
+			for(int i = 0; i < sa->len; i++)
 				mergedData[i+len] = data[i];
 			len += sa->len; 
 			return *this;
-		};
-		~StringArray(){delete[] data;};
+		}
+		~StringArray(){delete[] data;}
 };
