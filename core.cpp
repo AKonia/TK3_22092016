@@ -2,6 +2,8 @@
 #include "StringArray.hpp"
 using namespace std;
 
+// Программа с реализованным классом одномерных массивом строк
+
 int main()
 {
 	const size_t ARR_SIZE = 10;
