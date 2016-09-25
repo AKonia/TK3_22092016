@@ -15,5 +15,6 @@ int main()
 	StringArray sa(ARR_SIZE, arr);
 	for(size_t i = 0; i < ARR_SIZE; i++)
 		sa[i].printStr();
+	delete[] arr;
 	return 0;
 }
