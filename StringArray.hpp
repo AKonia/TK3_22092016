@@ -63,17 +63,17 @@ class StringArray
 		{
 			len = length; 
 			data = new String[len];
-			for(int i = 0; i < len; i++)
+			for(size_t i = 0; i < len; i++)
 				data[i] = arr[i];
 		}
 		String & operator[](size_t indx){return data[indx % len];}	
 		StringArray & mergeUniqe(StringArray & sa)
 		{
 			size_t newLen = len;
-			for(int i = 0; i < sa.len; i++)
+			for(size_t i = 0; i < sa.len; i++)
 			{
 				newLen++;
-				for(int j = 0; j < len; j++)
+				for(size_t j = 0; j < len; j++)
 					if(sa[i] == data[j])
 					{
 						newLen--;
@@ -81,13 +81,13 @@ class StringArray
 					}
 			}
 			String * newData = new String[newLen];
-			for(int i = 0; i < len; i++)
+			for(size_t i = 0; i < len; i++)
 				newData[i] = data[i];
 		 	int indx = len+1;
-			for(int i = 0; i < sa.len; i++)
+			for(size_t i = 0; i < sa.len; i++)
 			{
 				bool ansCopy = true;
-				for(int j = 0; j < len; j++)
+				for(size_t j = 0; j < len; j++)
 					if(sa[i] == data[j])
 					{
 						ansCopy = false;
@@ -104,10 +104,10 @@ class StringArray
 		StringArray & merge(StringArray * sa)
 		{
 			String * mergedData = new String[len + sa->len];						
-			for(int i = 0; i < len; i++)
+			for(size_t i = 0; i < len; i++)
 				mergedData[i] = data[i];
 			delete[] data;
-			for(int i = 0; i < sa->len; i++)
+			for(size_t i = 0; i < sa->len; i++)
 				mergedData[i+len] = data[i];
 			len += sa->len; 
 			return *this;
