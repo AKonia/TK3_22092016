@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 
-
 class String
 {	
 	private:
@@ -13,13 +12,13 @@ class String
 		{
 			len = s.len;
 			data = new char[len];
-			for(size_t i = 0; data[i] = s.data[i]; i++);
+			for(size_t i = 0; (data[i] = s.data[i]) != 0; i++);
 		}
 		String(const char * s, size_t length)
 		{
 			len = length;
 			data = new char[len];
-			for(size_t i = 0; data[i] = s[i]; i++);
+			for(size_t i = 0; (data[i] = s[i]) != 0; i++);
 		}
 		~String(){delete[] data;};
 		char &operator[](size_t indx){return data[indx % len];};
@@ -37,7 +36,7 @@ class String
 			len = s.len;
 			delete[] data;
 			data = new char[len];
-			for(size_t i = 0; data[i] = s.data[i]; i++);
+			for(size_t i = 0; (data[i] = s.data[i]) != 0; i++);
 			return *this;
 		}
 		String & operator=(const char * s)
@@ -45,7 +44,7 @@ class String
 			len = strlen(s);
 			delete[] data;
 			data = new char[len];
-			for(size_t i = 0; data[i] = s[i]; i++);
+			for(size_t i = 0; (data[i] = s[i]) != 0; i++);
 			return *this;
 		}
 		void printStr(){std::cout << data;}		
